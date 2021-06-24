@@ -12,7 +12,6 @@ headers = {
 }
 
 def get_data(index):
-    # url = 'https://catalog.onliner.by/sdapi/catalog.api/search/videocard?page=1'
     url = 'https://catalog.onliner.by/sdapi/catalog.api/search/videocard?order=price:asc&page=1'
     r = requests.get(url=url, headers=headers)
 
@@ -23,7 +22,6 @@ def get_data(index):
     dict_price = {}
 
     for page in range(1, page_count + 1):
-        # url = f"https://catalog.onliner.by/sdapi/catalog.api/search/videocard?page={page}"
         url = f'https://catalog.onliner.by/sdapi/catalog.api/search/videocard?order=price:asc&page={page}'
         r = requests.get(url=url, headers=headers)
         data = r.json()
@@ -33,21 +31,12 @@ def get_data(index):
             if f' {index} ' in product['name'] and len(dict_price) <= count_pozition - 1:
                 html_url = product['html_url']
                 product_name = product['extended_name']
-                # if product['prices'] is None:
-                #     continue
-                # else:
                 prices = product['prices']
                 offers = prices['offers']
                 count = offers['count']
                 price_min = prices['price_min']
                 amount = price_min['amount']
                 dict_price[float(amount)] = f'{product_name}, {html_url}'
-                print(len(dict_price))
 
     dict_p = (OrderedDict(sorted(dict_price.items(), key=lambda t: t[0]))).items()
-    print(dict_price)
     return dict_p
-
-get_data('6800')
-
-print(time.time() - t)
