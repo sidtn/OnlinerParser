@@ -2,7 +2,6 @@ from get_data import get_data
 import telebot
 from config import api_key_tel
 
-
 def tel_bot():
     bot = telebot.TeleBot(api_key_tel)
 

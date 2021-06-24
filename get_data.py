@@ -1,9 +1,6 @@
 import requests
 from collections import OrderedDict
-import time
 
-
-t = time.time()
 
 headers = {
         "accept": "application/json, text/javascript, */*; q=0.01",
